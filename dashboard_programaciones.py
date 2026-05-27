@@ -178,19 +178,6 @@ def mostrar_graficos(df: pd.DataFrame) -> None:
 
     col3, col4 = st.columns(2)
 
-
-    with col4:
-        importe_carrera = df.groupby("Carrera", as_index=False)["Importe"].sum().sort_values("Importe", ascending=False)
-        fig_importe_carrera = px.bar(
-            importe_carrera,
-            x="Carrera",
-            y="Importe",
-            title="Importe por carrera",
-            text_auto=".2s",
-        )
-        fig_importe_carrera.update_layout(xaxis_title="", yaxis_title="Importe S/")
-        st.plotly_chart(fig_importe_carrera, use_container_width=True)
-
     if "FechaPago" in df.columns and df["FechaPago"].notna().any():
         st.subheader("Evolución de pagos")
         pagos_dia = (
