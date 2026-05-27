@@ -178,17 +178,6 @@ def mostrar_graficos(df: pd.DataFrame) -> None:
 
     col3, col4 = st.columns(2)
 
-    with col3:
-        importe_estado = df.groupby("Estado", as_index=False)["Importe"].sum().sort_values("Importe", ascending=False)
-        fig_importe_estado = px.bar(
-            importe_estado,
-            x="Estado",
-            y="Importe",
-            title="Importe por estado",
-            text_auto=".2s",
-        )
-        fig_importe_estado.update_layout(xaxis_title="", yaxis_title="Importe S/")
-        st.plotly_chart(fig_importe_estado, use_container_width=True)
 
     with col4:
         importe_carrera = df.groupby("Carrera", as_index=False)["Importe"].sum().sort_values("Importe", ascending=False)
