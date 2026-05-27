@@ -119,7 +119,7 @@ def aplicar_filtros(df: pd.DataFrame) -> pd.DataFrame:
 def mostrar_kpis(df: pd.DataFrame) -> None:
     total_registros = len(df)
     personas_unicas = df["Dni"].nunique() if "Dni" in df.columns else 0
-    total_importe = df["Importe"].sum()
+
 
     cancelado = df[df["Estado"].eq("CANCELADO")]
     pendiente = df[df["Estado"].eq("PENDIENTE")]
@@ -133,14 +133,12 @@ def mostrar_kpis(df: pd.DataFrame) -> None:
     col1, col2, col3, col4 = st.columns(4)
     col1.metric("Total registros", f"{total_registros:,}")
     col2.metric("Personas únicas", f"{personas_unicas:,}")
-    col3.metric("Importe total", formato_soles(total_importe))
     col4.metric("Tasa de pago", f"{tasa_pago:.1f}%")
 
     col5, col6, col7, col8 = st.columns(4)
     col5.metric("Cancelados", f"{total_cancelados:,}")
     col6.metric("Pendientes", f"{total_pendientes:,}")
-    col7.metric("Recaudado", formato_soles(importe_cancelado))
-    col8.metric("Por cobrar", formato_soles(importe_pendiente))
+    
 
 
 def grafico_vacio(mensaje: str) -> None:
