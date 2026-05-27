@@ -252,7 +252,7 @@ def mostrar_tablas(df: pd.DataFrame) -> None:
 
 
 def main() -> None:
-    st.title("📊 Dashboard de Seguimiento de Inscritos al Congreso")
+    st.title("📊 Dashboard de Seguimiento de Inscritos al Congreso 2026")
     st.caption("Carga tu archivo Excel para generar KPIs, gráficos, filtros y una tabla descargable.")
 
     with st.expander("Columnas mínimas esperadas", expanded=False):
