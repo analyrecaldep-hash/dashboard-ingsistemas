@@ -231,6 +231,7 @@ def mostrar_kpis(df: pd.DataFrame) -> None:
     """
 
     st.markdown(html_kpis, unsafe_allow_html=True)
+    
 def grafico_vacio(mensaje: str) -> None:
     st.info(mensaje)
 
