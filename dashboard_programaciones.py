@@ -114,5 +114,41 @@ def mostrar_kpis(df: pd.DataFrame) -> None:
 
     st.markdown(html_kpis, unsafe_allow_html=True)
 
+def main() -> None:
+    st.title("📊 Dashboard de Seguimiento de Inscritos al Congreso 2026")
+    st.caption("Carga tu archivo Excel para generar KPIs, gráficos, filtros y una tabla descargable.")
+
+    with st.expander("Columnas mínimas esperadas", expanded=False):
+        st.write(", ".join(sorted(COLUMNAS_MINIMAS)))
+
+    archivo = st.file_uploader(
+        "Cargar archivo Excel",
+        type=["xlsx", "xls"],
+        help="Selecciona el reporte de inscritos al congreso.",
+    )
+
+    if archivo is None:
+        st.info("Carga un archivo Excel para visualizar el dashboard.")
+        st.stop()
+
+    try:
+        df = cargar_excel(archivo)
+    except Exception as e:
+        st.error(f"No se pudo cargar el archivo: {e}")
+        st.stop()
+
+    st.success(f"Archivo cargado correctamente. Registros encontrados: {len(df):,}")
+
+    df_filtrado = aplicar_filtros(df)
+
+    if df_filtrado.empty:
+        st.warning("No hay datos con los filtros seleccionados.")
+        st.stop()
+
+    mostrar_kpis(df_filtrado)
+    mostrar_graficos(df_filtrado)
+    mostrar_tablas(df_filtrado)
+
+
 if __name__ == "__main__":
     main()
